@@ -67,7 +67,7 @@ const gameDetailsManager = {
     ).getFullYear()}</span> | <span>Rating: ${game.rating}</span>
               </div>
               <div class="price-section">
-                <span class="price">${game.price}</span>
+                <span class="price">$${game.price}</span>
                 <button class="add-to-cart-btn" data-game-id="${
                   game.uniqueIdentifier
                 }">Add to Cart</button>
@@ -316,7 +316,7 @@ const gameDetailsManager = {
             .filter(
               (game) =>
                 game.category === currentGame.category &&
-                game.uniqueIdentifier !== currentGame.uniqueIdentifier
+                game.id !== currentGame.id
             )
             .slice(0, 3);
 
@@ -325,7 +325,7 @@ const gameDetailsManager = {
         similarGames.forEach((game) => {
           const gameElement = document.createElement("a");
           gameElement.className = "similar-game";
-          gameElement.href = `game-details.html?id=${game.uniqueIdentifier}`;
+          gameElement.href = `game-details.html?id=${game.id}`;
 
           gameElement.innerHTML = `
             <img src="${game.image}" alt="${
@@ -452,8 +452,7 @@ const gameDetailsManager = {
 
       // Check if game is already in wishlist
       const existingIndex = wishlist.findIndex(
-        (item) =>
-          item.uniqueIdentifier === this.currentGameData.uniqueIdentifier
+        (item) => item.id === this.currentGameData.id
       );
 
       if (existingIndex === -1) {

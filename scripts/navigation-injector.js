@@ -207,14 +207,14 @@ const cartManagementSystem = {
   addItemToCart(gameData) {
     const cartItems = this.getCartItemsFromStorage();
     const existingItemIndex = cartItems.findIndex(
-      (item) => item.id === gameData.id
+      (item) => item.uniqueIdentifier === gameData.uniqueIdentifier
     );
 
     if (existingItemIndex !== -1) {
       cartItems[existingItemIndex].quantity += 1;
     } else {
       cartItems.push({
-        id: gameData.id,
+        uniqueIdentifier: gameData.uniqueIdentifier,
         title: gameData.title,
         price: gameData.price,
         image: gameData.image,
@@ -230,7 +230,9 @@ const cartManagementSystem = {
   // Remove item from cart
   removeItemFromCart(gameId) {
     const cartItems = this.getCartItemsFromStorage();
-    const filteredItems = cartItems.filter((item) => item.id !== gameId);
+    const filteredItems = cartItems.filter(
+      (item) => item.uniqueIdentifier !== gameId
+    );
     this.saveCartToStorage(filteredItems);
     this.updateCartIndicator();
   },
@@ -238,7 +240,9 @@ const cartManagementSystem = {
   // Update item quantity
   updateItemQuantity(gameId, newQuantity) {
     const cartItems = this.getCartItemsFromStorage();
-    const itemIndex = cartItems.findIndex((item) => item.id === gameId);
+    const itemIndex = cartItems.findIndex(
+      (item) => item.uniqueIdentifier === gameId
+    );
 
     if (itemIndex !== -1) {
       if (newQuantity <= 0) {

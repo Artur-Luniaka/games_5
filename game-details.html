@@ -22,5 +22,12 @@
 
     <script src="scripts/navigation-injector.js"></script>
     <script src="scripts/game-details-manager.js"></script>
+    <script>
+      // Initialize navigation and game details
+      document.addEventListener("DOMContentLoaded", function () {
+        navigationInjectionSystem.initializeInjectionSystem();
+        gameDetailsManager.initializeGameDetails();
+      });
+    </script>
   </body>
 </html>

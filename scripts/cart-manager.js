@@ -44,7 +44,7 @@ const cartManager = {
   // Create cart item HTML
   createCartItemHTML(item) {
     return `
-            <div class="cart-item" data-item-id="${item.id}">
+            <div class="cart-item" data-item-id="${item.uniqueIdentifier}">
                 <div class="cart-item__visual">
                     <img src="${item.image}" alt="${item.title}" loading="lazy">
                 </div>
@@ -60,7 +60,7 @@ const cartManager = {
                     <div class="cart-item__controls">
                         <div class="cart-item__quantity">
                             <button class="quantity-btn" onclick="cartManager.updateQuantity('${
-                              item.id
+                              item.uniqueIdentifier
                             }', ${item.quantity - 1})" ${
       item.quantity <= 1 ? "disabled" : ""
     }>
@@ -72,7 +72,7 @@ const cartManager = {
                               item.quantity
                             }</span>
                             <button class="quantity-btn" onclick="cartManager.updateQuantity('${
-                              item.id
+                              item.uniqueIdentifier
                             }', ${item.quantity + 1})">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -82,7 +82,7 @@ const cartManager = {
                         </div>
                         
                         <button class="cart-item__remove" onclick="cartManager.removeItem('${
-                          item.id
+                          item.uniqueIdentifier
                         }')">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M3 6h18"></path>
@@ -244,7 +244,7 @@ const cartManager = {
   selectRecommendations(allGames) {
     // Get current cart items
     const cartItems = cartManagementSystem.getCartItemsFromStorage();
-    const cartItemIds = cartItems.map((item) => item.id);
+    const cartItemIds = cartItems.map((item) => item.uniqueIdentifier);
 
     // Filter out games already in cart and select random ones
     const availableGames = allGames.filter(

@@ -1,25 +1,21 @@
 // Game Catalog Management System
-const gameCatalogManager = {
+const catalogManagementSystem = {
   // Initialize catalog manager
   initializeCatalogManager() {
     this.loadGamesData();
     this.setupEventListeners();
-    this.setupViewToggle();
-    this.updateResultsCount();
+    this.updateStats();
   },
 
   // Current state
   currentState: {
     games: [],
     filteredGames: [],
-    filters: {
-      category: "all",
-      platform: "all",
-      priceRange: "all",
-      searchQuery: "",
-    },
-    sortBy: "name",
-    viewMode: "grid",
+    searchQuery: "",
+    sortBy: "featured",
+    currentPage: 1,
+    gamesPerPage: 6,
+    totalPages: 1,
   },
 
   // Load games data from JSON
@@ -35,10 +31,14 @@ const gameCatalogManager = {
       this.currentState.games =
         data.digitalEntertainmentCollection.entertainmentItems;
       this.currentState.filteredGames = [...this.currentState.games];
+      this.currentState.totalPages = Math.ceil(
+        this.currentState.games.length / this.currentState.gamesPerPage
+      );
 
       this.renderGames();
+      this.renderPagination();
       this.hideLoadingState();
-      this.updateResultsCount();
+      this.updateStats();
     } catch (error) {
       console.error("Error loading games data:", error);
       this.showErrorState();
@@ -47,83 +47,36 @@ const gameCatalogManager = {
 
   // Setup event listeners
   setupEventListeners() {
-    // Filter controls
-    const categoryFilter = document.getElementById("category-filter");
-    const platformFilter = document.getElementById("platform-filter");
-    const priceFilter = document.getElementById("price-filter");
-    const sortFilter = document.getElementById("sort-filter");
     const searchInput = document.getElementById("search-input");
-    const clearFiltersBtn = document.getElementById("clear-filters");
+    const sortSelect = document.getElementById("sort-select");
+    const prevPageBtn = document.getElementById("prev-page");
+    const nextPageBtn = document.getElementById("next-page");
 
-    if (categoryFilter) {
-      categoryFilter.addEventListener("change", (e) => {
-        this.currentState.filters.category = e.target.value;
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        this.currentState.searchQuery = e.target.value;
+        this.currentState.currentPage = 1; // Reset to first page on search
         this.applyFilters();
       });
     }
 
-    if (platformFilter) {
-      platformFilter.addEventListener("change", (e) => {
-        this.currentState.filters.platform = e.target.value;
-        this.applyFilters();
-      });
-    }
-
-    if (priceFilter) {
-      priceFilter.addEventListener("change", (e) => {
-        this.currentState.filters.priceRange = e.target.value;
-        this.applyFilters();
-      });
-    }
-
-    if (sortFilter) {
-      sortFilter.addEventListener("change", (e) => {
+    if (sortSelect) {
+      sortSelect.addEventListener("change", (e) => {
         this.currentState.sortBy = e.target.value;
         this.applyFilters();
       });
     }
 
-    if (searchInput) {
-      searchInput.addEventListener("input", (e) => {
-        this.currentState.filters.searchQuery = e.target.value;
-        this.applyFilters();
+    if (prevPageBtn) {
+      prevPageBtn.addEventListener("click", () => {
+        this.goToPage(this.currentState.currentPage - 1);
       });
     }
 
-    if (clearFiltersBtn) {
-      clearFiltersBtn.addEventListener("click", () => {
-        this.clearAllFilters();
+    if (nextPageBtn) {
+      nextPageBtn.addEventListener("click", () => {
+        this.goToPage(this.currentState.currentPage + 1);
       });
-    }
-
-    // Handle URL parameters
-    this.handleUrlParameters();
-  },
-
-  // Setup view toggle
-  setupViewToggle() {
-    const viewToggles = document.querySelectorAll(".view-toggle");
-    const gamesContainer = document.getElementById("games-container");
-
-    viewToggles.forEach((toggle) => {
-      toggle.addEventListener("click", () => {
-        const viewMode = toggle.dataset.view;
-        this.setViewMode(viewMode);
-
-        // Update active state
-        viewToggles.forEach((t) => t.classList.remove("active"));
-        toggle.classList.add("active");
-      });
-    });
-  },
-
-  // Set view mode
-  setViewMode(viewMode) {
-    this.currentState.viewMode = viewMode;
-    const gamesContainer = document.getElementById("games-container");
-
-    if (gamesContainer) {
-      gamesContainer.className = `games-container ${viewMode}-view`;
     }
   },
 
@@ -131,37 +84,9 @@ const gameCatalogManager = {
   applyFilters() {
     let filtered = [...this.currentState.games];
 
-    // Apply category filter
-    if (this.currentState.filters.category !== "all") {
-      filtered = filtered.filter(
-        (game) => game.category === this.currentState.filters.category
-      );
-    }
-
-    // Apply platform filter
-    if (this.currentState.filters.platform !== "all") {
-      filtered = filtered.filter((game) =>
-        game.platforms.includes(this.currentState.filters.platform)
-      );
-    }
-
-    // Apply price range filter
-    if (this.currentState.filters.priceRange !== "all") {
-      const [min, max] = this.parsePriceRange(
-        this.currentState.filters.priceRange
-      );
-      filtered = filtered.filter((game) => {
-        const price = game.price;
-        if (max === null) {
-          return price >= min;
-        }
-        return price >= min && price <= max;
-      });
-    }
-
     // Apply search filter
-    if (this.currentState.filters.searchQuery.trim() !== "") {
-      const query = this.currentState.filters.searchQuery.toLowerCase();
+    if (this.currentState.searchQuery.trim() !== "") {
+      const query = this.currentState.searchQuery.toLowerCase();
       filtered = filtered.filter(
         (game) =>
           game.title.toLowerCase().includes(query) ||
@@ -175,25 +100,18 @@ const gameCatalogManager = {
     filtered = this.sortGames(filtered, this.currentState.sortBy);
 
     this.currentState.filteredGames = filtered;
-    this.renderGames();
-    this.updateResultsCount();
-    this.updateActiveFilters();
-  },
+    this.currentState.totalPages = Math.ceil(
+      filtered.length / this.currentState.gamesPerPage
+    );
 
-  // Parse price range
-  parsePriceRange(range) {
-    switch (range) {
-      case "0-30":
-        return [0, 30];
-      case "30-50":
-        return [30, 50];
-      case "50-70":
-        return [50, 70];
-      case "70+":
-        return [70, null];
-      default:
-        return [0, null];
+    // Ensure current page is valid
+    if (this.currentState.currentPage > this.currentState.totalPages) {
+      this.currentState.currentPage = this.currentState.totalPages || 1;
     }
+
+    this.renderGames();
+    this.renderPagination();
+    this.updateStats();
   },
 
   // Sort games
@@ -201,7 +119,7 @@ const gameCatalogManager = {
     const sorted = [...games];
 
     switch (sortBy) {
-      case "name":
+      case "alphabetical":
         return sorted.sort((a, b) => a.title.localeCompare(b.title));
       case "price-low":
         return sorted.sort((a, b) => a.price - b.price);
@@ -209,13 +127,22 @@ const gameCatalogManager = {
         return sorted.sort((a, b) => b.price - a.price);
       case "rating":
         return sorted.sort((a, b) => b.userScore - a.userScore);
-      case "release":
+      case "newest":
         return sorted.sort(
           (a, b) => new Date(b.releaseDate) - new Date(a.releaseDate)
         );
+      case "featured":
       default:
         return sorted;
     }
+  },
+
+  // Get current page games
+  getCurrentPageGames() {
+    const startIndex =
+      (this.currentState.currentPage - 1) * this.currentState.gamesPerPage;
+    const endIndex = startIndex + this.currentState.gamesPerPage;
+    return this.currentState.filteredGames.slice(startIndex, endIndex);
   },
 
   // Render games
@@ -223,12 +150,14 @@ const gameCatalogManager = {
     const container = document.getElementById("games-container");
     if (!container) return;
 
-    if (this.currentState.filteredGames.length === 0) {
+    const currentPageGames = this.getCurrentPageGames();
+
+    if (currentPageGames.length === 0) {
       this.showNoResults();
       return;
     }
 
-    const gamesHTML = this.currentState.filteredGames
+    const gamesHTML = currentPageGames
       .map((game) => this.createGameCardHTML(game))
       .join("");
 
@@ -246,76 +175,77 @@ const gameCatalogManager = {
     const priceDisplay =
       game.discountPercentage > 0
         ? `<span class="game-card__price-original">$${game.originalPrice}</span>
-               <span class="game-card__price-current">$${game.price}</span>`
+           <span class="game-card__price-current">$${game.price}</span>`
         : `<span class="game-card__price-current">$${game.price}</span>`;
 
-    const scoreColor = this.getScoreColor(game.userScore);
+    const platformsHTML = game.platforms
+      .map(
+        (platform) =>
+          `<span class="platform-badge platform-badge--${platform.toLowerCase()}">${platform}</span>`
+      )
+      .join("");
+
+    const tagsHTML = game.tags
+      .slice(0, 3)
+      .map((tag) => `<span class="tag">${tag}</span>`)
+      .join("");
 
     return `
-            <article class="game-card" data-game-id="${game.uniqueIdentifier}">
-                <div class="game-card__visual">
-                    <img src="${game.visualAssets.primaryImage}" alt="${
+      <div class="game-card" data-game-id="${game.uniqueIdentifier}">
+        <div class="game-card__visual">
+          <img src="${game.image}" alt="${
       game.title
-    }" loading="lazy">
-                    ${discountBadge}
-                    <div class="game-card__overlay">
-                        <button class="game-card__add-to-cart" onclick="gameCatalogManager.addGameToCart('${
-                          game.uniqueIdentifier
-                        }')">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"></path>
-                            </svg>
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="game-card__content">
-                    <div class="game-card__header">
-                        <h3 class="game-card__title">${game.title}</h3>
-                        <div class="game-card__score" style="color: ${scoreColor}">
-                            ${game.userScore}
-                        </div>
-                    </div>
-                    
-                    <p class="game-card__subtitle">${game.subtitle}</p>
-                    
-                    <div class="game-card__meta">
-                        <div class="game-card__platforms">
-                            ${game.platforms
-                              .map(
-                                (platform) =>
-                                  `<span class="platform-badge platform-badge--${platform.toLowerCase()}">${platform}</span>`
-                              )
-                              .join("")}
-                        </div>
-                        
-                        <div class="game-card__rating">
-                            <span class="rating-badge">${game.rating}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="game-card__pricing">
-                        ${priceDisplay}
-                    </div>
-                    
-                    <div class="game-card__tags">
-                        ${game.tags
-                          .slice(0, 3)
-                          .map((tag) => `<span class="tag">${tag}</span>`)
-                          .join("")}
-                    </div>
-                </div>
-            </article>
-        `;
+    }" class="game-card__image" />
+          ${discountBadge}
+        </div>
+        
+        <div class="game-card__content">
+          <div class="game-card__header">
+            <h3 class="game-card__title">${game.title}</h3>
+            <div class="game-card__score" style="color: ${this.getScoreColor(
+              game.userScore
+            )}">
+              ★ ${game.userScore}
+            </div>
+          </div>
+          
+          <p class="game-card__subtitle">${game.subtitle}</p>
+          
+          <div class="game-card__meta">
+            <div class="game-card__platforms">
+              ${platformsHTML}
+            </div>
+            <div class="game-card__rating">
+              <span class="rating-badge">${game.rating}</span>
+            </div>
+          </div>
+          
+          <div class="game-card__footer">
+            <div class="game-card__pricing">
+              ${priceDisplay}
+            </div>
+            <button class="game-card__add-to-cart" onclick="event.stopPropagation(); catalogManagementSystem.addGameToCart('${
+              game.uniqueIdentifier
+            }')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span>Add</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
   },
 
   // Get score color
   getScoreColor(score) {
-    if (score >= 9.0) return "#10b981";
-    if (score >= 8.0) return "#f59e0b";
-    if (score >= 7.0) return "#f97316";
-    return "#64748b";
+    if (score >= 8.5) return "#10b981";
+    if (score >= 7.5) return "#f59e0b";
+    if (score >= 6.5) return "#ef4444";
+    return "#6b7280";
   },
 
   // Setup game card interactions
@@ -323,16 +253,7 @@ const gameCatalogManager = {
     const gameCards = document.querySelectorAll(".game-card");
 
     gameCards.forEach((card) => {
-      card.addEventListener("click", (event) => {
-        const addToCartButton = event.target.closest(".game-card__add-to-cart");
-        if (addToCartButton) {
-          return; // Let the onclick handle it
-        }
-
-        const gameId = card.dataset.gameId;
-        window.location.href = `game-details.html?id=${gameId}`;
-      });
-
+      // Hover animations
       card.addEventListener("mouseenter", () => {
         this.animateGameCard(card, "enter");
       });
@@ -340,23 +261,33 @@ const gameCatalogManager = {
       card.addEventListener("mouseleave", () => {
         this.animateGameCard(card, "leave");
       });
+
+      // Click handler for entire card
+      card.addEventListener("click", (event) => {
+        // Don't trigger if clicking on add to cart button
+        if (event.target.closest(".game-card__add-to-cart")) {
+          return;
+        }
+
+        const gameId = card.getAttribute("data-game-id");
+        if (gameId) {
+          window.location.href = `game-details.html?id=${gameId}`;
+        }
+      });
+
+      // Add cursor pointer to indicate clickable
+      card.style.cursor = "pointer";
     });
   },
 
   // Animate game card
   animateGameCard(card, action) {
-    const visual = card.querySelector(".game-card__visual");
-    const overlay = card.querySelector(".game-card__overlay");
-    const content = card.querySelector(".game-card__content");
-
     if (action === "enter") {
-      visual.style.transform = "scale(1.05)";
-      overlay.style.opacity = "1";
-      content.style.transform = "translateY(-5px)";
+      card.style.transform = "translateY(-8px)";
+      card.style.boxShadow = "0 20px 40px rgba(0, 0, 0, 0.15)";
     } else {
-      visual.style.transform = "scale(1)";
-      overlay.style.opacity = "0";
-      content.style.transform = "translateY(0)";
+      card.style.transform = "translateY(0)";
+      card.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
     }
   },
 
@@ -365,212 +296,259 @@ const gameCatalogManager = {
     const game = this.currentState.games.find(
       (g) => g.uniqueIdentifier === gameId
     );
+    if (!game) return;
 
-    if (game) {
-      const gameData = {
-        id: game.uniqueIdentifier,
+    // Get existing cart
+    let cart = [];
+    try {
+      const cartData = localStorage.getItem("pixelVaultCart");
+      cart = cartData ? JSON.parse(cartData) : [];
+    } catch (error) {
+      console.error("Error reading cart:", error);
+      cart = [];
+    }
+
+    // Check if game already in cart
+    const existingItem = cart.find((item) => item.uniqueIdentifier === gameId);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({
+        uniqueIdentifier: game.uniqueIdentifier,
         title: game.title,
         price: game.price,
-        image: game.visualAssets.primaryImage,
-      };
+        image: game.image,
+        quantity: 1,
+      });
+    }
 
-      cartManagementSystem.addItemToCart(gameData);
+    // Save cart
+    try {
+      localStorage.setItem("pixelVaultCart", JSON.stringify(cart));
+    } catch (error) {
+      console.error("Error saving cart:", error);
+    }
+
+    // Update cart indicator
+    if (window.navigationInjectionSystem) {
+      window.navigationInjectionSystem.updateCartIndicator();
+    }
+
+    // Show notification
+    this.showAddToCartNotification(game.title);
+  },
+
+  // Show add to cart notification
+  showAddToCartNotification(gameTitle) {
+    const notification = document.createElement("div");
+    notification.className = "add-to-cart-notification";
+    notification.innerHTML = `
+      <div class="notification-content">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 12l2 2 4-4"></path>
+        </svg>
+        <span>${gameTitle} added to cart!</span>
+      </div>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Animate in
+    setTimeout(() => {
+      notification.classList.add("show");
+    }, 100);
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+      notification.classList.remove("show");
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification);
+        }
+      }, 300);
+    }, 3000);
+  },
+
+  // Render pagination
+  renderPagination() {
+    const paginationPages = document.getElementById("pagination-pages");
+    const prevBtn = document.getElementById("prev-page");
+    const nextBtn = document.getElementById("next-page");
+
+    if (!paginationPages || !prevBtn || !nextBtn) return;
+
+    // Update prev/next buttons
+    prevBtn.disabled = this.currentState.currentPage <= 1;
+    nextBtn.disabled =
+      this.currentState.currentPage >= this.currentState.totalPages;
+
+    // Generate page numbers
+    let pagesHTML = "";
+    const maxVisiblePages = 5;
+    let startPage = Math.max(
+      1,
+      this.currentState.currentPage - Math.floor(maxVisiblePages / 2)
+    );
+    let endPage = Math.min(
+      this.currentState.totalPages,
+      startPage + maxVisiblePages - 1
+    );
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      const isActive = i === this.currentState.currentPage;
+      pagesHTML += `
+        <button class="pagination__page ${
+          isActive ? "pagination__page--active" : ""
+        }" 
+                onclick="catalogManagementSystem.goToPage(${i})">
+          ${i}
+        </button>
+      `;
+    }
+
+    paginationPages.innerHTML = pagesHTML;
+  },
+
+  // Go to specific page
+  goToPage(page) {
+    if (page < 1 || page > this.currentState.totalPages) return;
+
+    this.currentState.currentPage = page;
+    this.renderGames();
+    this.renderPagination();
+    this.updateStats();
+
+    // Scroll to top of games section
+    const gamesSection = document.querySelector(".games-showcase");
+    if (gamesSection) {
+      gamesSection.scrollIntoView({ behavior: "smooth" });
     }
   },
 
-  // Clear all filters
-  clearAllFilters() {
-    this.currentState.filters = {
-      category: "all",
-      platform: "all",
-      priceRange: "all",
-      searchQuery: "",
-    };
-    this.currentState.sortBy = "name";
+  // Update stats
+  updateStats() {
+    const totalGames = document.getElementById("total-games");
+    const totalPages = document.getElementById("total-pages");
+    const currentPage = document.getElementById("current-page");
+    const gamesRange = document.getElementById("games-range");
+    const totalGamesDisplay = document.getElementById("total-games-display");
 
-    // Reset form elements
-    const categoryFilter = document.getElementById("category-filter");
-    const platformFilter = document.getElementById("platform-filter");
-    const priceFilter = document.getElementById("price-filter");
-    const sortFilter = document.getElementById("sort-filter");
-    const searchInput = document.getElementById("search-input");
+    if (totalGames) totalGames.textContent = this.currentState.games.length;
+    if (totalPages) totalPages.textContent = this.currentState.totalPages;
+    if (currentPage) currentPage.textContent = this.currentState.currentPage;
 
-    if (categoryFilter) categoryFilter.value = "all";
-    if (platformFilter) platformFilter.value = "all";
-    if (priceFilter) priceFilter.value = "all";
-    if (sortFilter) sortFilter.value = "name";
-    if (searchInput) searchInput.value = "";
+    const startGame =
+      (this.currentState.currentPage - 1) * this.currentState.gamesPerPage + 1;
+    const endGame = Math.min(
+      startGame + this.currentState.gamesPerPage - 1,
+      this.currentState.filteredGames.length
+    );
 
-    this.applyFilters();
-  },
-
-  // Filter by category (for collection cards)
-  filterByCategory(category) {
-    this.currentState.filters.category = category;
-
-    const categoryFilter = document.getElementById("category-filter");
-    if (categoryFilter) {
-      categoryFilter.value = category;
-    }
-
-    this.applyFilters();
-
-    // Scroll to results
-    const resultsSection = document.querySelector(".catalog-results");
-    if (resultsSection) {
-      resultsSection.scrollIntoView({ behavior: "smooth" });
-    }
-  },
-
-  // Update results count
-  updateResultsCount() {
-    const resultsCount = document.getElementById("results-count");
-    if (resultsCount) {
-      const count = this.currentState.filteredGames.length;
-      const total = this.currentState.games.length;
-      resultsCount.textContent = `${count} of ${total} games found`;
-    }
-  },
-
-  // Update active filters display
-  updateActiveFilters() {
-    const activeFilters = document.getElementById("active-filters");
-    if (!activeFilters) return;
-
-    const activeFiltersList = [];
-
-    if (this.currentState.filters.category !== "all") {
-      activeFiltersList.push(`Category: ${this.currentState.filters.category}`);
-    }
-    if (this.currentState.filters.platform !== "all") {
-      activeFiltersList.push(`Platform: ${this.currentState.filters.platform}`);
-    }
-    if (this.currentState.filters.priceRange !== "all") {
-      activeFiltersList.push(`Price: ${this.currentState.filters.priceRange}`);
-    }
-    if (this.currentState.filters.searchQuery.trim() !== "") {
-      activeFiltersList.push(
-        `Search: "${this.currentState.filters.searchQuery}"`
-      );
-    }
-
-    activeFilters.textContent =
-      activeFiltersList.length > 0
-        ? `Active filters: ${activeFiltersList.join(", ")}`
-        : "";
-  },
-
-  // Handle URL parameters
-  handleUrlParameters() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const category = urlParams.get("category");
-
-    if (category && category !== "all") {
-      this.currentState.filters.category = category;
-      const categoryFilter = document.getElementById("category-filter");
-      if (categoryFilter) {
-        categoryFilter.value = category;
-      }
-      this.applyFilters();
-    }
+    if (gamesRange) gamesRange.textContent = `${startGame}-${endGame}`;
+    if (totalGamesDisplay)
+      totalGamesDisplay.textContent = this.currentState.filteredGames.length;
   },
 
   // Show loading state
   showLoadingState() {
-    const loadingIndicator = document.getElementById("loading-indicator");
-    const gamesContainer = document.getElementById("games-container");
-    const noResults = document.getElementById("no-results");
-
-    if (loadingIndicator) loadingIndicator.style.display = "block";
-    if (gamesContainer) gamesContainer.style.display = "none";
-    if (noResults) noResults.style.display = "none";
+    const container = document.getElementById("games-container");
+    if (container) {
+      container.innerHTML = `
+        <div class="loading-indicator">
+          <div class="loading-spinner"></div>
+          <p>Loading games...</p>
+        </div>
+      `;
+    }
   },
 
   // Hide loading state
   hideLoadingState() {
-    const loadingIndicator = document.getElementById("loading-indicator");
-    const gamesContainer = document.getElementById("games-container");
-
-    if (loadingIndicator) loadingIndicator.style.display = "none";
-    if (gamesContainer) gamesContainer.style.display = "grid";
+    // Loading state is cleared when games are rendered
   },
 
   // Show no results
   showNoResults() {
-    const gamesContainer = document.getElementById("games-container");
-    const noResults = document.getElementById("no-results");
-
-    if (gamesContainer) gamesContainer.style.display = "none";
-    if (noResults) noResults.style.display = "block";
+    const container = document.getElementById("games-container");
+    if (container) {
+      container.innerHTML = `
+        <div class="no-results">
+          <div class="no-results__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </div>
+          <h3>No games found</h3>
+          <p>Try adjusting your search terms or browse all games</p>
+        </div>
+      `;
+    }
   },
 
   // Show error state
   showErrorState() {
-    const gamesContainer = document.getElementById("games-container");
-    const loadingIndicator = document.getElementById("loading-indicator");
-
-    if (loadingIndicator) loadingIndicator.style.display = "none";
-    if (gamesContainer) {
-      gamesContainer.innerHTML = `
-                <div class="error-state">
-                    <div class="error-state__icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="15" y1="9" x2="9" y2="15"></line>
-                            <line x1="9" y1="9" x2="15" y2="15"></line>
-                        </svg>
-                    </div>
-                    <h3>Unable to Load Games</h3>
-                    <p>We're experiencing some technical difficulties. Please try again later.</p>
-                    <button onclick="gameCatalogManager.loadGamesData()" class="retry-button">
-                        Try Again
-                    </button>
-                </div>
-            `;
+    const container = document.getElementById("games-container");
+    if (container) {
+      container.innerHTML = `
+        <div class="error-state">
+          <div class="error-state__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+          </div>
+          <h3>Error loading games</h3>
+          <p>Something went wrong while loading the game catalog</p>
+          <button class="retry-button" onclick="catalogManagementSystem.loadGamesData()">
+            Try Again
+          </button>
+        </div>
+      `;
     }
   },
 };
 
-// Add error state styles
-const addErrorStateStyles = () => {
+// Add notification styles
+const addNotificationStyles = () => {
   const style = document.createElement("style");
   style.textContent = `
-        .error-state {
-            text-align: center;
-            padding: var(--spacing-2xl);
-            color: var(--text-secondary);
-            grid-column: 1 / -1;
-        }
-
-        .error-state__icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto var(--spacing-lg);
-            color: var(--neutral-slate);
-        }
-
-        .error-state__icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .error-state h3 {
-            color: var(--text-primary);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .error-state p {
-            margin-bottom: var(--spacing-lg);
-        }
-    `;
+    .add-to-cart-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--primary-emerald);
+      color: white;
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-medium);
+      z-index: 1000;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .add-to-cart-notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification-content {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+    
+    .notification-content svg {
+      width: 20px;
+      height: 20px;
+    }
+  `;
   document.head.appendChild(style);
 };
 
-// Initialize when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  gameCatalogManager.initializeCatalogManager();
-  addErrorStateStyles();
-});
-
-// Export for use in other scripts
-window.gameCatalogManager = gameCatalogManager;
+// Initialize notification styles
+addNotificationStyles();

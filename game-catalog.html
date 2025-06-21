@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Catalog - PixelVault</title>
+    <title>Game Catalog - OnlineGameFusionLab</title>
     <link rel="stylesheet" href="styles/visual-essence.css" />
     <link rel="stylesheet" href="styles/catalog-styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,218 +17,121 @@
     <div id="navigation-container"></div>
 
     <main class="catalog-realm">
+      <!-- Hero Section -->
       <section class="catalog-hero">
         <div class="container">
-          <h1 class="catalog-hero__title">Game Collection</h1>
-          <p class="catalog-hero__subtitle">
-            Discover your next digital adventure from our curated selection
-          </p>
-        </div>
-      </section>
-
-      <section class="catalog-controls">
-        <div class="container">
-          <div class="catalog-controls__layout">
-            <div class="catalog-controls__filters">
-              <div class="filter-group">
-                <h3 class="filter-group__title">Categories</h3>
-                <div class="filter-group__options">
-                  <label class="filter-option">
-                    <input
-                      type="checkbox"
-                      value="Action"
-                      class="filter-option__input"
-                    />
-                    <span class="filter-option__label">Action</span>
-                  </label>
-                  <label class="filter-option">
-                    <input
-                      type="checkbox"
-                      value="Adventure"
-                      class="filter-option__input"
-                    />
-                    <span class="filter-option__label">Adventure</span>
-                  </label>
-                  <label class="filter-option">
-                    <input
-                      type="checkbox"
-                      value="RPG"
-                      class="filter-option__input"
-                    />
-                    <span class="filter-option__label">RPG</span>
-                  </label>
-                  <label class="filter-option">
-                    <input
-                      type="checkbox"
-                      value="Strategy"
-                      class="filter-option__input"
-                    />
-                    <span class="filter-option__label">Strategy</span>
-                  </label>
-                  <label class="filter-option">
-                    <input
-                      type="checkbox"
-                      value="Racing"
-                      class="filter-option__input"
-                    />
-                    <span class="filter-option__label">Racing</span>
-                  </label>
-                  <label class="filter-option">
-                    <input
-                      type="checkbox"
-                      value="Horror"
-                      class="filter-option__input"
-                    />
-                    <span class="filter-option__label">Horror</span>
-                  </label>
-                </div>
+          <div class="catalog-hero__content">
+            <h1 class="catalog-hero__title">🎮 Game Collection</h1>
+            <p class="catalog-hero__subtitle">
+              Discover your next digital adventure from our curated selection of
+              premium games
+            </p>
+            <div class="catalog-hero__stats">
+              <div class="stat-item">
+                <span class="stat-number" id="total-games">12</span>
+                <span class="stat-label">Total Games</span>
               </div>
-
-              <div class="filter-group">
-                <h3 class="filter-group__title">Platform</h3>
-                <div class="filter-group__options">
-                  <label class="filter-option">
-                    <input
-                      type="checkbox"
-                      value="PC"
-                      class="filter-option__input"
-                    />
-                    <span class="filter-option__label">PC</span>
-                  </label>
-                  <label class="filter-option">
-                    <input
-                      type="checkbox"
-                      value="Xbox"
-                      class="filter-option__input"
-                    />
-                    <span class="filter-option__label">Xbox</span>
-                  </label>
-                </div>
+              <div class="stat-item">
+                <span class="stat-number" id="total-pages">2</span>
+                <span class="stat-label">Pages</span>
               </div>
-
-              <div class="filter-group">
-                <h3 class="filter-group__title">Price Range</h3>
-                <div class="price-range">
-                  <input
-                    type="range"
-                    id="price-slider"
-                    min="0"
-                    max="100"
-                    value="100"
-                    class="price-range__slider"
-                  />
-                  <div class="price-range__values">
-                    <span>$0</span>
-                    <span id="price-value">$100+</span>
-                  </div>
-                </div>
-              </div>
-
-              <button class="clear-filters" id="clear-filters">
-                Clear All Filters
-              </button>
-            </div>
-
-            <div class="catalog-controls__main">
-              <div class="catalog-controls__header">
-                <div class="search-container">
-                  <input
-                    type="text"
-                    placeholder="Search games..."
-                    id="search-input"
-                    class="search-input"
-                  />
-                  <svg
-                    class="search-icon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
-                  </svg>
-                </div>
-
-                <div class="catalog-controls__actions">
-                  <div class="sort-container">
-                    <select id="sort-select" class="sort-select">
-                      <option value="featured">Featured</option>
-                      <option value="price-low">Price: Low to High</option>
-                      <option value="price-high">Price: High to Low</option>
-                      <option value="newest">Newest First</option>
-                      <option value="rating">Highest Rated</option>
-                      <option value="alphabetical">A-Z</option>
-                    </select>
-                  </div>
-
-                  <div class="view-toggle">
-                    <button
-                      class="view-toggle__btn view-toggle__btn--grid active"
-                      data-view="grid"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
-                      </svg>
-                    </button>
-                    <button
-                      class="view-toggle__btn view-toggle__btn--list"
-                      data-view="list"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <line x1="8" y1="6" x2="21" y2="6"></line>
-                        <line x1="8" y1="12" x2="21" y2="12"></line>
-                        <line x1="8" y1="18" x2="21" y2="18"></line>
-                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="catalog-results">
-                <div class="results-info">
-                  <span id="results-count">0 games found</span>
-                </div>
-
-                <div class="games-grid" id="games-container">
-                  <!-- Games will be loaded dynamically -->
-                </div>
-
-                <div class="load-more-container">
-                  <button class="load-more-btn" id="load-more-btn">
-                    <span>Load More Games</span>
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <polyline points="6,9 12,15 18,9"></polyline>
-                    </svg>
-                  </button>
-                </div>
+              <div class="stat-item">
+                <span class="stat-number" id="current-page">1</span>
+                <span class="stat-label">Current Page</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- Games Grid Section -->
+      <section class="games-showcase">
+        <div class="container">
+          <div class="games-showcase__header">
+            <div class="games-showcase__info">
+              <h2 class="section-title">All Games</h2>
+              <p class="section-subtitle">
+                Showing <span id="games-range">1-6</span> of
+                <span id="total-games-display">12</span> games
+              </p>
+            </div>
+            <div class="games-showcase__controls">
+              <div class="search-container">
+                <input
+                  type="text"
+                  placeholder="Search games..."
+                  id="search-input"
+                  class="search-input"
+                />
+                <svg
+                  class="search-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.35-4.35"></path>
+                </svg>
+              </div>
+              <div class="sort-container">
+                <select id="sort-select" class="sort-select">
+                  <option value="featured">Featured</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="newest">Newest First</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="alphabetical">A-Z</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="games-grid" id="games-container">
+            <!-- Games will be loaded dynamically -->
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination" id="pagination">
+            <button
+              class="pagination__btn pagination__btn--prev"
+              id="prev-page"
+              disabled
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="15,18 9,12 15,6"></polyline>
+              </svg>
+              Previous
+            </button>
+
+            <div class="pagination__pages" id="pagination-pages">
+              <!-- Page numbers will be generated dynamically -->
+            </div>
+
+            <button
+              class="pagination__btn pagination__btn--next"
+              id="next-page"
+            >
+              Next
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Collections -->
       <section class="featured-collections">
         <div class="container">
           <h2 class="section-title">Featured Collections</h2>
