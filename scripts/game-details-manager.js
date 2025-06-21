@@ -17,7 +17,9 @@ const gameDetailsManager = {
       return;
     }
 
+    this.currentGameData = gameData;
     this.renderGameDetails(gameData);
+    this.setupEventListeners();
   },
 
   getGameIdFromUrl() {
@@ -46,14 +48,15 @@ const gameDetailsManager = {
     const container = document.getElementById("game-details-container");
     if (!container) return;
 
+    container.className = "game-details-page";
     document.title = `${game.title} - OnlineGameFusionLab`;
 
     const detailsHTML = `
-      <div class="game-details-page">
+      <div class="container">
         <div class="game-hero">
           <img src="${game.image}" alt="${
       game.title
-    }" class="hero-background-image"/>
+    } background" class="hero-background-image"/>
           <div class="hero-content">
             <div class="game-cover">
               <img src="${game.image}" alt="${game.title} Cover Art"/>
@@ -62,12 +65,14 @@ const gameDetailsManager = {
               <h1>${game.title}</h1>
               <p>${game.subtitle}</p>
               <div class="meta-info">
-                <span>${game.developer}</span> | <span>${new Date(
-      game.releaseDate
-    ).getFullYear()}</span> | <span>Rating: ${game.rating}</span>
+                <span>${game.developer}</span>
+                <span>|</span>
+                <span>${new Date(game.releaseDate).getFullYear()}</span>
+                <span>|</span>
+                <span>Rating: ${game.rating}</span>
               </div>
               <div class="price-section">
-                <span class="price">$${game.price}</span>
+                <span class="price">$${game.price.toFixed(2)}</span>
                 <button class="add-to-cart-btn" data-game-id="${
                   game.uniqueIdentifier
                 }">Add to Cart</button>
@@ -75,25 +80,40 @@ const gameDetailsManager = {
             </div>
           </div>
         </div>
+
         <div class="game-content">
-          <h2>About the Game</h2>
-          <p>${game.description}</p>
-          <h2>Features</h2>
-          <ul>
-            ${game.features.map((feature) => `<li>${feature}</li>`).join("")}
-          </ul>
-          <h2>System Requirements</h2>
-          <div class="system-reqs">
-             <p><strong>OS:</strong> ${game.systemRequirements.minimum.os}</p>
-             <p><strong>Processor:</strong> ${
-               game.systemRequirements.minimum.processor
-             }</p>
-             <p><strong>Memory:</strong> ${
-               game.systemRequirements.minimum.memory
-             }</p>
-             <p><strong>Graphics:</strong> ${
-               game.systemRequirements.minimum.graphics
-             }</p>
+          <div class="main-column">
+            <section id="about">
+              <h2>About the Game</h2>
+              <p>${game.description}</p>
+            </section>
+            <section id="features">
+              <h2>Features</h2>
+              <ul>
+                ${game.features
+                  .map((feature) => `<li>${feature}</li>`)
+                  .join("")}
+              </ul>
+            </section>
+          </div>
+          <div class="sidebar-column">
+            <section id="system-requirements">
+              <h2>System Requirements</h2>
+              <div class="system-reqs">
+                 <p><strong>OS:</strong> ${
+                   game.systemRequirements.minimum.os
+                 }</p>
+                 <p><strong>Processor:</strong> ${
+                   game.systemRequirements.minimum.processor
+                 }</p>
+                 <p><strong>Memory:</strong> ${
+                   game.systemRequirements.minimum.memory
+                 }</p>
+                 <p><strong>Graphics:</strong> ${
+                   game.systemRequirements.minimum.graphics
+                 }</p>
+              </div>
+            </section>
           </div>
         </div>
       </div>
@@ -102,11 +122,22 @@ const gameDetailsManager = {
     container.innerHTML = detailsHTML;
   },
 
+  setupEventListeners() {
+    const addToCartBtn = document.querySelector(".add-to-cart-btn");
+    if (addToCartBtn) {
+      addToCartBtn.addEventListener("click", () => {
+        if (this.currentGameData) {
+          cartManagementSystem.addItemToCart(this.currentGameData);
+        }
+      });
+    }
+  },
+
   // Render error message
   renderError(message) {
     const container = document.getElementById("game-details-container");
     if (!container) return;
-    container.innerHTML = `<p class="error-message">${message}</p>`;
+    container.innerHTML = `<div class="container"><p class="error-message">${message}</p></div>`;
   },
 
   // Update page title
@@ -410,63 +441,6 @@ const gameDetailsManager = {
         });
       });
     });
-  },
-
-  // Setup event listeners
-  setupEventListeners() {
-    // Add to cart button
-    const addToCartBtn = document.getElementById("add-to-cart-btn");
-    if (addToCartBtn) {
-      addToCartBtn.addEventListener("click", () => {
-        this.addGameToCart();
-      });
-    }
-
-    // Wishlist button
-    const wishlistBtn = document.getElementById("wishlist-btn");
-    if (wishlistBtn) {
-      wishlistBtn.addEventListener("click", () => {
-        this.addGameToWishlist();
-      });
-    }
-  },
-
-  // Add game to cart
-  addGameToCart() {
-    if (this.currentGameData) {
-      // Use the navigation system's cart functionality
-      if (typeof navigationInjectionSystem !== "undefined") {
-        navigationInjectionSystem.addItemToCart(this.currentGameData);
-        this.showNotification("Game added to cart!", "success");
-      }
-    }
-  },
-
-  // Add game to wishlist
-  addGameToWishlist() {
-    if (this.currentGameData) {
-      // Get existing wishlist from localStorage
-      const wishlist = JSON.parse(
-        localStorage.getItem("pixelvault_wishlist") || "[]"
-      );
-
-      // Check if game is already in wishlist
-      const existingIndex = wishlist.findIndex(
-        (item) => item.id === this.currentGameData.id
-      );
-
-      if (existingIndex === -1) {
-        // Add to wishlist
-        wishlist.push(this.currentGameData);
-        localStorage.setItem("pixelvault_wishlist", JSON.stringify(wishlist));
-        this.showNotification("Game added to wishlist!", "success");
-      } else {
-        // Remove from wishlist
-        wishlist.splice(existingIndex, 1);
-        localStorage.setItem("pixelvault_wishlist", JSON.stringify(wishlist));
-        this.showNotification("Game removed from wishlist!", "info");
-      }
-    }
   },
 
   // Show notification
