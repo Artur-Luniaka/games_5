@@ -7,6 +7,7 @@ const contactFormHandler = {
   form: null,
   submitButton: null,
   isSubmitting: false,
+  notificationTimer: null,
 
   /**
    * Initialize the contact form
@@ -78,6 +79,9 @@ const contactFormHandler = {
     }
 
     this.setSubmittingState(true);
+
+    // Scroll to top on successful validation before submitting
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
     try {
       // Simulate form submission
@@ -270,35 +274,32 @@ const contactFormHandler = {
   },
 
   /**
-   * Show form message
+   * Show a message to the user
    */
   showFormMessage(message, type) {
-    // Remove existing messages
-    const existingMessages = this.form.querySelectorAll(
-      ".success-message, .error-message"
-    );
-    existingMessages.forEach((msg) => msg.remove());
-
-    // Create new message
-    const messageElement = document.createElement("div");
-    messageElement.className = `${type}-message`;
-
-    const icon =
-      type === "success"
-        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"></polyline></svg>'
-        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
-
-    messageElement.innerHTML = `${icon}<span>${message}</span>`;
-
-    // Insert at the beginning of the form
-    this.form.insertBefore(messageElement, this.form.firstChild);
-
-    // Auto-remove success messages after 5 seconds
-    if (type === "success") {
-      setTimeout(() => {
-        messageElement.remove();
-      }, 5000);
+    const notification = document.getElementById("form-notification");
+    if (!notification) {
+      console.warn("Form notification element not found");
+      return;
     }
+
+    // Clear any existing timer to avoid premature hiding
+    if (this.notificationTimer) {
+      clearTimeout(this.notificationTimer);
+    }
+
+    // Set message and type
+    notification.textContent = message;
+    notification.className = "form-notification"; // Reset classes
+    notification.classList.add(type); // 'success' or 'error'
+
+    // Show the notification
+    notification.classList.add("show");
+
+    // Hide the notification after 5 seconds
+    this.notificationTimer = setTimeout(() => {
+      notification.classList.remove("show");
+    }, 5000);
   },
 
   /**
