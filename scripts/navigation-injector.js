@@ -142,6 +142,14 @@ const navigationInjectionSystem = {
           this.closeNavigationMenu();
         }
       });
+
+      // Close menu on anchor link click
+      const anchorLinks = menuPanel.querySelectorAll('a[href*="#"]');
+      anchorLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          this.closeNavigationMenu();
+        });
+      });
     }
   },
 
