@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PixelVault - Premium Gaming Store</title>
+    <title>OnlineGameFusionLab.com - Premium Gaming Store</title>
+    <link rel="icon" type="image/png" href="public/favicon.png" />
+    <meta
+      name="description"
+      content="Discover the latest PC and Xbox games at OnlineGameFusionLab.com. Shop new releases, best sellers, and exclusive deals with fast shipping and excellent customer support."
+    />
     <link rel="stylesheet" href="styles/visual-essence.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -348,12 +353,27 @@
 
     <div id="footer-container"></div>
 
+    <div id="cookie-consent-bar" class="cookie-consent-bar">
+      <div class="container cookie-consent-bar__content">
+        <p class="cookie-consent-bar__text">
+          We use cookies to enhance your browsing experience and analyze our
+          traffic. By clicking "Accept", you consent to our use of cookies.
+        </p>
+        <button id="cookie-consent-accept" class="cookie-consent-bar__button">
+          Accept
+        </button>
+      </div>
+    </div>
+
     <script src="scripts/navigation-injector.js"></script>
     <script src="scripts/hero-animations.js"></script>
-    <script src="scripts/flash-deals-countdown.js"></script>
+    <script src="scripts/trending-loader.js"></script>
     <script src="scripts/new-releases-loader.js"></script>
+    <script src="scripts/flash-deals-countdown.js"></script>
+    <script src="scripts/newsletter-handler.js"></script>
+    <script src="scripts/cookie-consent.js"></script>
     <script>
-      // Initialize all systems
+      // Initialize navigation
       document.addEventListener("DOMContentLoaded", function () {
         // Note: navigation-injector.js and new-releases-loader.js run themselves on DOMContentLoaded
         // heroAnimationSystem.initializeHeroAnimations();

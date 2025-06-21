@@ -49,7 +49,7 @@ const gameDetailsManager = {
     if (!container) return;
 
     container.className = "game-details-page";
-    document.title = `${game.title} - OnlineGameFusionLab`;
+    document.title = `${game.title} - OnlineGameFusionLab.com`;
 
     const detailsHTML = `
       <div class="container">
@@ -142,7 +142,7 @@ const gameDetailsManager = {
 
   // Update page title
   updatePageTitle(title) {
-    document.title = `${title} - PixelVault`;
+    document.title = `${title} - OnlineGameFusionLab.com`;
   },
 
   // Render hero section

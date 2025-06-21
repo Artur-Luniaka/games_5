@@ -16,7 +16,7 @@ const navigationInjectionSystem = {
     const navigationHTML = `
             <nav class="navigation-bar">
                 <div class="navigation-bar__content">
-                    <a href="index.html" class="navigation-bar__logo">
+                    <a href="./" class="navigation-bar__logo">
                         <div class="navigation-bar__logo-image">OGFL</div>
                         <span class="navigation-bar__logo-text">OnlineGameFusionLab</span>
                     </a>
@@ -52,16 +52,16 @@ const navigationInjectionSystem = {
                 <nav class="menu-panel__nav">
                     <ul class="menu-panel__nav-list">
                         <li class="menu-panel__nav-item">
-                            <a href="index.html" class="menu-panel__nav-link">Home</a>
+                            <a href="./" class="menu-panel__nav-link">Home</a>
                         </li>
                         <li class="menu-panel__nav-item">
                             <a href="game-catalog.html" class="menu-panel__nav-link">Games Catalog</a>
                         </li>
                         <li class="menu-panel__nav-item">
-                            <a href="index.html#game-bundles" class="menu-panel__nav-link">Bundles</a>
+                            <a href="./#game-bundles" class="menu-panel__nav-link">Bundles</a>
                         </li>
                         <li class="menu-panel__nav-item">
-                            <a href="index.html#new-releases" class="menu-panel__nav-link">New Releases</a>
+                            <a href="./#new-releases" class="menu-panel__nav-link">New Releases</a>
                         </li>
                         <li class="menu-panel__nav-item">
                             <a href="contact-page.html" class="menu-panel__nav-link">Contact</a>

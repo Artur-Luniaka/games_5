@@ -348,7 +348,7 @@ const checkoutManager = {
 
   // Go to home page
   goToHome() {
-    window.location.href = "index.html";
+    window.location.href = "./";
   },
 
   // Input formatting methods
