@@ -1,0 +1,409 @@
+{
+  "digitalEntertainmentCollection": {
+    "metadata": {
+      "collectionName": "PixelVault Digital Entertainment Collection",
+      "version": "1.0.0",
+      "lastUpdated": "2024-01-15",
+      "totalEntries": 12,
+      "supportedPlatforms": ["PC", "Xbox"]
+    },
+    "entertainmentItems": [
+      {
+        "uniqueIdentifier": "cyberpunk-2077-phantom-liberty",
+        "title": "Cyberpunk 2077: Phantom Liberty",
+        "subtitle": "Night City's Darkest Secrets",
+        "price": 29.99,
+        "originalPrice": 39.99,
+        "discountPercentage": 25,
+        "category": "action",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-09-26",
+        "developer": "CD Projekt Red",
+        "publisher": "CD Projekt",
+        "rating": "M",
+        "userScore": 8.7,
+        "criticScore": 89,
+        "image": "public/cyberpunk-2077-phantom-liberty.jpg",
+        "description": "Experience the most dangerous game of all in Night City. As V, a cyberpunk for hire, you'll navigate a world of corporate intrigue, street gangs, and cybernetic enhancements.",
+        "features": [
+          "Expansive open world",
+          "Deep character customization",
+          "Multiple story paths",
+          "Advanced AI systems"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel Core i5-3570K",
+            "memory": "8 GB RAM",
+            "graphics": "NVIDIA GeForce GTX 970"
+          }
+        },
+        "tags": ["RPG", "Open World", "Cyberpunk", "Story Rich"]
+      },
+      {
+        "uniqueIdentifier": "baldurs-gate-3",
+        "title": "Baldur's Gate 3",
+        "subtitle": "Epic Fantasy Adventure",
+        "price": 59.99,
+        "originalPrice": 59.99,
+        "discountPercentage": 0,
+        "category": "rpg",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-08-03",
+        "developer": "Larian Studios",
+        "publisher": "Larian Studios",
+        "rating": "M",
+        "userScore": 9.2,
+        "criticScore": 96,
+        "image": "public/baldurs-gate-3.jpg",
+        "description": "Gather your party and return to the Forgotten Realms in a tale of fellowship and betrayal, sacrifice and survival, and the lure of absolute power.",
+        "features": [
+          "Turn-based combat",
+          "Cooperative multiplayer",
+          "Rich storytelling",
+          "Character customization"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel I5 4690",
+            "memory": "8 GB RAM",
+            "graphics": "GTX 970"
+          }
+        },
+        "tags": ["RPG", "Turn-Based", "Fantasy", "Co-op"]
+      },
+      {
+        "uniqueIdentifier": "starfield",
+        "title": "Starfield",
+        "subtitle": "Journey Through the Stars",
+        "price": 69.99,
+        "originalPrice": 69.99,
+        "discountPercentage": 0,
+        "category": "rpg",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-09-06",
+        "developer": "Bethesda Game Studios",
+        "publisher": "Bethesda Softworks",
+        "rating": "M",
+        "userScore": 7.8,
+        "criticScore": 83,
+        "image": "public/starfield.jpg",
+        "description": "In this next generation role-playing game set amongst the stars, create any character you want and explore with unparalleled freedom as you embark on an epic journey.",
+        "features": [
+          "Vast open universe",
+          "Space exploration",
+          "Ship customization",
+          "Multiple planets"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "AMD Ryzen 5 2600X",
+            "memory": "16 GB RAM",
+            "graphics": "AMD RX 5700"
+          }
+        },
+        "tags": ["RPG", "Space", "Exploration", "Open World"]
+      },
+      {
+        "uniqueIdentifier": "alan-wake-2",
+        "title": "Alan Wake 2",
+        "subtitle": "Psychological Horror Thriller",
+        "price": 49.99,
+        "originalPrice": 59.99,
+        "discountPercentage": 17,
+        "category": "horror",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-10-27",
+        "developer": "Remedy Entertainment",
+        "publisher": "Epic Games",
+        "rating": "M",
+        "userScore": 8.9,
+        "criticScore": 87,
+        "image": "public/alan-wake-2.jpg",
+        "description": "A string of ritualistic murders threatens Bright Falls, a small-town community surrounded by Pacific Northwest wilderness. Saga Anderson arrives to investigate the murders.",
+        "features": [
+          "Survival horror",
+          "Dual protagonist story",
+          "Atmospheric gameplay",
+          "Mind-bending narrative"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel i5-7600K",
+            "memory": "16 GB RAM",
+            "graphics": "RTX 2060"
+          }
+        },
+        "tags": ["Horror", "Survival", "Psychological", "Thriller"]
+      },
+      {
+        "uniqueIdentifier": "forza-motorsport",
+        "title": "Forza Motorsport",
+        "subtitle": "Racing Excellence Redefined",
+        "price": 69.99,
+        "originalPrice": 69.99,
+        "discountPercentage": 0,
+        "category": "racing",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-10-10",
+        "developer": "Turn 10 Studios",
+        "publisher": "Xbox Game Studios",
+        "rating": "E",
+        "userScore": 8.1,
+        "criticScore": 84,
+        "image": "public/forza-motorsport.jpg",
+        "description": "Experience the thrill of authentic racing at the limit with the most technically advanced racing game ever made.",
+        "features": [
+          "Realistic physics",
+          "500+ cars",
+          "20+ tracks",
+          "Dynamic weather"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel i5-8400",
+            "memory": "16 GB RAM",
+            "graphics": "GTX 1060"
+          }
+        },
+        "tags": ["Racing", "Simulation", "Sports", "Multiplayer"]
+      },
+      {
+        "uniqueIdentifier": "cities-skylines-2",
+        "title": "Cities: Skylines II",
+        "subtitle": "Build Your Dream Metropolis",
+        "price": 49.99,
+        "originalPrice": 49.99,
+        "discountPercentage": 0,
+        "category": "strategy",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-10-24",
+        "developer": "Colossal Order",
+        "publisher": "Paradox Interactive",
+        "rating": "E",
+        "userScore": 7.5,
+        "criticScore": 78,
+        "image": "public/cities-skylines-2.jpg",
+        "description": "Create and manage your own city in the most realistic city builder ever. Plan road networks, manage services, and watch your city grow.",
+        "features": [
+          "Advanced city planning",
+          "Realistic simulation",
+          "Mod support",
+          "Multiplayer features"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel i5-12600K",
+            "memory": "8 GB RAM",
+            "graphics": "GTX 970"
+          }
+        },
+        "tags": ["Strategy", "City Builder", "Simulation", "Management"]
+      },
+      {
+        "uniqueIdentifier": "lies-of-p",
+        "title": "Lies of P",
+        "subtitle": "Dark Souls Meets Pinocchio",
+        "price": 59.99,
+        "originalPrice": 59.99,
+        "discountPercentage": 0,
+        "category": "action",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-09-19",
+        "developer": "Neowiz Games",
+        "publisher": "Neowiz",
+        "rating": "M",
+        "userScore": 8.3,
+        "criticScore": 82,
+        "image": "public/lies-of-p.jpg",
+        "description": "A dark retelling of the classic Pinocchio tale, set in a Belle Époque world where you must fight to become human.",
+        "features": [
+          "Souls-like combat",
+          "Weapon crafting",
+          "Dark atmosphere",
+          "Challenging bosses"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel Core i5-8400",
+            "memory": "16 GB RAM",
+            "graphics": "GTX 1060"
+          }
+        },
+        "tags": ["Action", "Souls-like", "Dark Fantasy", "Challenging"]
+      },
+      {
+        "uniqueIdentifier": "sea-of-stars",
+        "title": "Sea of Stars",
+        "subtitle": "Retro RPG Adventure",
+        "price": 34.99,
+        "originalPrice": 34.99,
+        "discountPercentage": 0,
+        "category": "indie",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-08-29",
+        "developer": "Sabotage Studio",
+        "publisher": "Sabotage Studio",
+        "rating": "E10+",
+        "userScore": 8.7,
+        "criticScore": 87,
+        "image": "public/sea-of-stars.jpg",
+        "description": "A turn-based RPG inspired by the classics. Tell the story of two Children of the Solstice who will combine the powers of the sun and moon to perform Eclipse Magic.",
+        "features": [
+          "Turn-based combat",
+          "Pixel art graphics",
+          "Original soundtrack",
+          "Cooperative play"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel Core i3-6100",
+            "memory": "4 GB RAM",
+            "graphics": "GTX 750"
+          }
+        },
+        "tags": ["RPG", "Indie", "Retro", "Turn-Based"]
+      },
+      {
+        "uniqueIdentifier": "mortal-kombat-1",
+        "title": "Mortal Kombat 1",
+        "subtitle": "Fighting Game Reboot",
+        "price": 69.99,
+        "originalPrice": 69.99,
+        "discountPercentage": 0,
+        "category": "action",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-09-19",
+        "developer": "NetherRealm Studios",
+        "publisher": "Warner Bros. Games",
+        "rating": "M",
+        "userScore": 8.0,
+        "criticScore": 83,
+        "image": "public/mortal-kombat-1.jpg",
+        "description": "Discover a reborn Mortal Kombat Universe created by the Fire God Liu Kang. Mortal Kombat 1 ushers in a new era of the iconic franchise.",
+        "features": [
+          "Fatalities",
+          "Story mode",
+          "Online multiplayer",
+          "Kameo fighters"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel Core i5-6600",
+            "memory": "8 GB RAM",
+            "graphics": "GTX 980"
+          }
+        },
+        "tags": ["Fighting", "Action", "Multiplayer", "Violent"]
+      },
+      {
+        "uniqueIdentifier": "dead-space-remake",
+        "title": "Dead Space",
+        "subtitle": "Survival Horror Remastered",
+        "price": 59.99,
+        "originalPrice": 69.99,
+        "discountPercentage": 14,
+        "category": "horror",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-01-27",
+        "developer": "Motive Studio",
+        "publisher": "Electronic Arts",
+        "rating": "M",
+        "userScore": 8.8,
+        "criticScore": 89,
+        "image": "public/dead-space-remake.jpg",
+        "description": "A sci-fi survival horror classic returns fully rebuilt from the ground up. Engineer Isaac Clarke is on a mission to repair a vast mining ship.",
+        "features": [
+          "Survival horror",
+          "Atmospheric gameplay",
+          "Strategic dismemberment",
+          "Zero gravity combat"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel Core i5-8600",
+            "memory": "16 GB RAM",
+            "graphics": "RTX 2070"
+          }
+        },
+        "tags": ["Horror", "Survival", "Sci-Fi", "Atmospheric"]
+      },
+      {
+        "uniqueIdentifier": "hi-fi-rush",
+        "title": "Hi-Fi RUSH",
+        "subtitle": "Rhythm Action Adventure",
+        "price": 29.99,
+        "originalPrice": 29.99,
+        "discountPercentage": 0,
+        "category": "indie",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2023-01-25",
+        "developer": "Tango Gameworks",
+        "publisher": "Bethesda Softworks",
+        "rating": "T",
+        "userScore": 8.9,
+        "criticScore": 87,
+        "image": "public/hi-fi-rush.jpg",
+        "description": "Feel the beat as wannabe rockstar Chai and his ragtag team of allies rebel against an evil robotics enhancement megacorp.",
+        "features": [
+          "Rhythm-based combat",
+          "Stylish visuals",
+          "Original soundtrack",
+          "Comedic story"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel Core i5-8400",
+            "memory": "8 GB RAM",
+            "graphics": "GTX 1060"
+          }
+        },
+        "tags": ["Action", "Rhythm", "Indie", "Comedy"]
+      },
+      {
+        "uniqueIdentifier": "age-of-empires-4",
+        "title": "Age of Empires IV",
+        "subtitle": "Historical Strategy Epic",
+        "price": 39.99,
+        "originalPrice": 59.99,
+        "discountPercentage": 33,
+        "category": "strategy",
+        "platforms": ["PC", "Xbox"],
+        "releaseDate": "2021-10-28",
+        "developer": "Relic Entertainment",
+        "publisher": "Xbox Game Studios",
+        "rating": "T",
+        "userScore": 8.2,
+        "criticScore": 81,
+        "image": "public/age-of-empires-4.jpg",
+        "description": "Experience the epic historical battles and build your empire in the latest installment of the legendary Age of Empires series.",
+        "features": [
+          "Real-time strategy",
+          "Historical campaigns",
+          "Multiplayer battles",
+          "Civilization building"
+        ],
+        "systemRequirements": {
+          "minimum": {
+            "os": "Windows 10",
+            "processor": "Intel Core i5-6300U",
+            "memory": "8 GB RAM",
+            "graphics": "Intel HD 520"
+          }
+        },
+        "tags": ["Strategy", "RTS", "Historical", "Multiplayer"]
+      }
+    ]
+  }
+}

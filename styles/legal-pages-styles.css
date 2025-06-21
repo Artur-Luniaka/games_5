@@ -1,0 +1,859 @@
+/* Legal Pages Styles */
+
+.legal-realm {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+}
+
+/* Legal Hero Section */
+.legal-hero {
+  padding: 3rem 0 4rem;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.legal-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="legal-grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23legal-grain)"/></svg>');
+  opacity: 0.3;
+}
+
+.legal-hero__content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.legal-hero__title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  background: linear-gradient(45deg, #fff, #ecf0f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.legal-hero__subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin: 0 0 2rem 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.legal-hero__meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.legal-meta {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Legal Content Section */
+.legal-content {
+  padding: 4rem 0;
+}
+
+.legal-content__layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.legal-content__main {
+  background: white;
+  border-radius: 1rem;
+  padding: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.legal-section {
+  margin-bottom: 3rem;
+}
+
+.legal-section:last-child {
+  margin-bottom: 0;
+}
+
+.legal-section h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e74c3c;
+}
+
+.legal-section h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #34495e;
+  margin: 2rem 0 1rem 0;
+}
+
+.legal-section h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #34495e;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.legal-section p {
+  line-height: 1.7;
+  color: #34495e;
+  margin-bottom: 1rem;
+}
+
+.legal-section ul,
+.legal-section ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.legal-section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  color: #34495e;
+}
+
+/* Usage Grid */
+.usage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.usage-item {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border-left: 4px solid #3498db;
+}
+
+.usage-item h4 {
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.usage-item p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Rights Grid */
+.rights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.right-item {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  border: 1px solid #dee2e6;
+}
+
+.right-item h4 {
+  color: #e74c3c;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.right-item p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Refund Policy Grid */
+.refund-policy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.refund-policy-item {
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 2px solid;
+}
+
+.refund-policy-item--eligible {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border-color: #28a745;
+}
+
+.refund-policy-item--ineligible {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  border-color: #dc3545;
+}
+
+.refund-policy-item h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+}
+
+.refund-policy-item ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.refund-policy-item li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* Timeframe Grid */
+.timeframe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.timeframe-item {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  border: 1px solid #dee2e6;
+}
+
+.timeframe-item h4 {
+  color: #e74c3c;
+  margin: 0 0 0.5rem 0;
+}
+
+.timeframe-item p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Prohibited Grid */
+.prohibited-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.prohibited-item {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border-left: 4px solid #dc3545;
+}
+
+.prohibited-item h4 {
+  color: #dc3545;
+  margin: 0 0 0.5rem 0;
+}
+
+.prohibited-item p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Refund Process */
+.refund-process {
+  margin: 2rem 0;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 0.75rem;
+}
+
+.process-step:last-child {
+  margin-bottom: 0;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.step-content h4 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.step-content p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Refund Methods */
+.refund-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.refund-method {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  border: 1px solid #dee2e6;
+}
+
+.refund-method h4 {
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+}
+
+.refund-method p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Shipping Options */
+.shipping-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.shipping-option {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 2px solid #dee2e6;
+}
+
+.shipping-option h3 {
+  color: #2c3e50;
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+}
+
+.shipping-details p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* Shipping Regions */
+.shipping-regions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.region-group {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #dee2e6;
+}
+
+.region-group h3 {
+  color: #2c3e50;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.region-group ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.region-group li {
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+/* Processing Timeline */
+.processing-timeline {
+  margin: 2rem 0;
+}
+
+.timeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 0.75rem;
+}
+
+.timeline-step:last-child {
+  margin-bottom: 0;
+}
+
+/* Tracking Methods */
+.tracking-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.tracking-method {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  border: 1px solid #dee2e6;
+}
+
+.tracking-method h4 {
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+}
+
+.tracking-method p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Delivery Issues */
+.delivery-issues {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.issue-type {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border-left: 4px solid #f39c12;
+}
+
+.issue-type h3 {
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.issue-type p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* International Info */
+.international-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.info-item {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #dee2e6;
+}
+
+.info-item h4 {
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+}
+
+.info-item p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Holiday Schedule */
+.holiday-schedule {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.holiday-period {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #dee2e6;
+}
+
+.holiday-period h4 {
+  color: #e74c3c;
+  margin: 0 0 0.5rem 0;
+}
+
+.holiday-period p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Contact Info */
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.contact-item {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #dee2e6;
+}
+
+.contact-item strong {
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.contact-item a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: #2980b9;
+}
+
+.contact-item span {
+  color: #34495e;
+  line-height: 1.5;
+}
+
+/* Sidebar */
+.legal-content__sidebar {
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.sidebar-section {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-section h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Legal Navigation */
+.legal-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.legal-nav__link {
+  color: #34495e;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ecf0f1;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.legal-nav__link:hover {
+  color: #e74c3c;
+  padding-left: 0.5rem;
+}
+
+.legal-nav__link:last-child {
+  border-bottom: none;
+}
+
+/* Related Documents */
+.related-docs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-docs li {
+  margin-bottom: 0.5rem;
+}
+
+.related-docs a {
+  color: #3498db;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.related-docs a:hover {
+  color: #2980b9;
+}
+
+/* Protection Badges */
+.protection-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.protection-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  color: #2c3e50;
+}
+
+.protection-badge svg {
+  width: 20px;
+  height: 20px;
+  color: #27ae60;
+}
+
+/* Important Notes */
+.important-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.note-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #fff3cd;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.note-item svg {
+  width: 20px;
+  height: 20px;
+  color: #f39c12;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* Track Order */
+.track-order {
+  text-align: center;
+}
+
+.track-order p {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+}
+
+.track-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.track-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.track-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+/* Shipping Calculator */
+.shipping-calculator {
+  text-align: center;
+}
+
+.shipping-calculator p {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+}
+
+.calc-select,
+.calc-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.calc-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.calc-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+/* Refund Status */
+.refund-status {
+  text-align: center;
+}
+
+.refund-status p {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+}
+
+.status-check-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(45deg, #27ae60, #229954);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.status-check-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1280px) {
+  .legal-content__layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .legal-hero__title {
+    font-size: 3rem;
+  }
+
+  .refund-policy-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .legal-hero {
+    padding: 2rem 0 3rem;
+  }
+
+  .legal-hero__title {
+    font-size: 2.5rem;
+  }
+
+  .legal-hero__meta {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .legal-content {
+    padding: 2rem 0;
+  }
+
+  .legal-content__main {
+    padding: 2rem;
+  }
+
+  .usage-grid,
+  .rights-grid,
+  .refund-methods,
+  .shipping-options,
+  .shipping-regions,
+  .tracking-methods,
+  .delivery-issues,
+  .international-info,
+  .holiday-schedule,
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+
+  .process-step,
+  .timeline-step {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .step-number {
+    align-self: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .legal-hero__title {
+    font-size: 2rem;
+  }
+
+  .legal-content__main {
+    padding: 1.5rem;
+  }
+
+  .legal-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .legal-section h3 {
+    font-size: 1.1rem;
+  }
+}
