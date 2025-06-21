@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   /* Color Palette - Avoiding purple, blue, and acid colors */
   --primary-emerald: #10b981;
@@ -57,6 +61,7 @@ body {
   color: var(--text-primary);
   background-color: var(--background-light);
   overflow-x: hidden;
+  margin: 0;
 }
 
 .container {

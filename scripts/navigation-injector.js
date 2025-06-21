@@ -86,8 +86,8 @@ const navigationInjectionSystem = {
                         <div class="footer-section__column">
                             <h3>Quick Links</h3>
                             <ul>
-                                <li><a href="#bundles">Bundles</a></li>
-                                <li><a href="#new-releases">New Releases</a></li>
+                                <li><a href="./#game-bundles">Bundles</a></li>
+                                <li><a href="./#new-releases">New Releases</a></li>
                                 <li><a href="game-catalog.html">Games Catalog</a></li>
                             </ul>
                         </div>

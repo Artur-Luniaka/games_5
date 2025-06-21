@@ -151,6 +151,7 @@ const checkoutManager = {
 
   // Navigation methods
   nextStep() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     if (this.currentState.currentStep < this.currentState.totalSteps) {
       this.currentState.currentStep++;
       this.updateStepDisplay();
@@ -159,6 +160,7 @@ const checkoutManager = {
   },
 
   previousStep() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     if (this.currentState.currentStep > 1) {
       this.currentState.currentStep--;
       this.updateStepDisplay();
@@ -167,6 +169,7 @@ const checkoutManager = {
   },
 
   editStep(step) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     this.currentState.currentStep = step;
     this.updateStepDisplay();
     this.updateProgressIndicator();
