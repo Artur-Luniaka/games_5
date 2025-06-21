@@ -17,196 +17,66 @@
     <div id="navigation-container"></div>
 
     <main class="cart-main">
-      <section class="cart-hero">
-        <div class="container">
-          <div class="cart-hero__content">
-            <h1 class="cart-hero__title">Your Digital Collection</h1>
-            <p class="cart-hero__subtitle">
-              Review your selected games and proceed to checkout
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="cart-content">
-        <div class="container">
-          <div class="cart-layout">
-            <div class="cart-items-section">
-              <div class="cart-header">
-                <h2>Shopping Cart</h2>
-                <span id="cart-items-count">0 items</span>
-              </div>
-
-              <div class="cart-items-container" id="cart-items-container">
-                <!-- Cart items will be loaded dynamically -->
-              </div>
-
-              <div class="empty-cart" id="empty-cart" style="display: none">
-                <div class="empty-cart__visual">
-                  <div class="empty-cart__icon">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div class="empty-cart__particles">
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                  </div>
-                </div>
-                <h3>Your Cart is Empty</h3>
-                <p>
-                  Looks like you haven't added any games to your collection yet.
-                  Start exploring our amazing selection!
-                </p>
-                <div class="empty-cart__actions">
-                  <a href="game-catalog.html" class="browse-games-btn">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"
-                      ></path>
-                    </svg>
-                    Browse Games
-                  </a>
-                  <a href="index.html" class="home-btn">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"
-                      ></path>
-                      <polyline points="9,22 9,12 15,12 15,22"></polyline>
-                    </svg>
-                    Go Home
-                  </a>
-                </div>
-              </div>
+      <div class="container">
+        <div class="cart-layout">
+          <div class="cart-items-section">
+            <div class="cart-header">
+              <h2>Your Cart</h2>
+              <span id="cart-items-count">0 items</span>
             </div>
 
-            <div class="cart-summary-section">
-              <div class="cart-summary">
-                <h3>Order Summary</h3>
+            <div class="cart-items-container" id="cart-items-container">
+              <!-- Cart items will be loaded dynamically -->
+            </div>
 
-                <div class="summary-items" id="summary-items">
-                  <!-- Summary items will be populated dynamically -->
+            <div class="empty-cart" id="empty-cart" style="display: none">
+              <h3>Your Cart is a Little Light...</h3>
+              <p>
+                Looks like you haven't added any games yet. Explore our
+                collection to find your next adventure!
+              </p>
+              <a href="game-catalog.html" class="browse-games-btn"
+                >Explore Games</a
+              >
+            </div>
+          </div>
+
+          <div class="cart-summary-section">
+            <div class="cart-summary">
+              <h3>Order Summary</h3>
+
+              <div class="summary-items" id="summary-items">
+                <!-- Summary items will be populated dynamically -->
+              </div>
+
+              <div class="summary-totals">
+                <div class="summary-row">
+                  <span>Subtotal</span>
+                  <span id="subtotal">$0.00</span>
                 </div>
-
-                <div class="summary-totals">
-                  <div class="summary-row">
-                    <span>Subtotal</span>
-                    <span id="subtotal">$0.00</span>
-                  </div>
-                  <div class="summary-row">
-                    <span>Tax</span>
-                    <span id="tax">$0.00</span>
-                  </div>
-                  <div class="summary-row summary-row--total">
-                    <span>Total</span>
-                    <span id="total">$0.00</span>
-                  </div>
+                <div class="summary-row">
+                  <span>Tax (8%)</span>
+                  <span id="tax">$0.00</span>
                 </div>
-
-                <div class="summary-actions">
-                  <button
-                    class="checkout-btn"
-                    id="checkout-btn"
-                    onclick="cartManager.proceedToCheckout()"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path d="M5 12h14"></path>
-                      <path d="M12 5l7 7-7 7"></path>
-                    </svg>
-                    Proceed to Checkout
-                  </button>
-
-                  <button
-                    class="continue-shopping-btn"
-                    onclick="window.location.href='game-catalog.html'"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path d="M19 12H5"></path>
-                      <path d="M12 19l-7-7 7-7"></path>
-                    </svg>
-                    Continue Shopping
-                  </button>
+                <div class="summary-row summary-row--total">
+                  <span>Total</span>
+                  <span id="total">$0.00</span>
                 </div>
+              </div>
 
-                <div class="summary-features">
-                  <div class="feature-item">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span>Instant Download</span>
-                  </div>
-                  <div class="feature-item">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span>Secure Payment</span>
-                  </div>
-                  <div class="feature-item">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span>24/7 Support</span>
-                  </div>
-                </div>
+              <div class="summary-actions">
+                <button
+                  class="checkout-btn"
+                  id="checkout-btn"
+                  onclick="cartManager.proceedToCheckout()"
+                >
+                  Proceed to Checkout
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      <section class="cart-recommendations">
-        <div class="container">
-          <h2 class="section-title">You Might Also Like</h2>
-          <div class="recommendations-grid" id="recommendations-grid">
-            <!-- Recommendations will be loaded dynamically -->
-          </div>
-        </div>
-      </section>
+      </div>
     </main>
 
     <div id="footer-container"></div>

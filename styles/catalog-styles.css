@@ -722,6 +722,95 @@
   }
 }
 
+/* Fix for very small screens */
+@media (max-width: 360px) {
+  .catalog-hero__title {
+    font-size: 1.75rem;
+  }
+
+  .catalog-hero__subtitle {
+    font-size: 0.9rem;
+  }
+
+  .catalog-hero__stats {
+    gap: var(--spacing-xs);
+  }
+
+  .catalog-hero__stats .stat-item {
+    padding: var(--spacing-sm);
+  }
+
+  .catalog-hero__stats .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .catalog-hero__stats .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .games-showcase__header {
+    gap: var(--spacing-md);
+  }
+
+  .games-showcase__controls {
+    gap: var(--spacing-sm);
+  }
+
+  .search-input {
+    font-size: 0.875rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .sort-select {
+    font-size: 0.875rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .game-card {
+    padding: var(--spacing-md);
+  }
+
+  .game-card__title {
+    font-size: 1.1rem;
+  }
+
+  .game-card__subtitle {
+    font-size: 0.9rem;
+  }
+
+  .game-card__content {
+    padding: var(--spacing-md);
+  }
+
+  .collection-card__content {
+    padding: var(--spacing-md);
+  }
+
+  .collection-card__content h3 {
+    font-size: 1.25rem;
+  }
+
+  .collection-card__content p {
+    font-size: 0.9rem;
+  }
+
+  .collection-card__link {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.875rem;
+  }
+
+  .pagination__btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.8rem;
+  }
+
+  .pagination__page {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+}
+
 .catalog-realm {
   padding-top: 80px; /* Adjust based on header height */
 }
