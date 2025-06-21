@@ -64,9 +64,6 @@ const navigationInjectionSystem = {
                             <a href="index.html#new-releases" class="menu-panel__nav-link">New Releases</a>
                         </li>
                         <li class="menu-panel__nav-item">
-                            <a href="index.html#peripherals" class="menu-panel__nav-link">Peripherals</a>
-                        </li>
-                        <li class="menu-panel__nav-item">
                             <a href="contact-page.html" class="menu-panel__nav-link">Contact</a>
                         </li>
                     </ul>
@@ -87,43 +84,27 @@ const navigationInjectionSystem = {
                 <div class="footer-section__content">
                     <div class="footer-section__grid">
                         <div class="footer-section__column">
-                            <h3>PixelVault</h3>
-                            <p>Your premier destination for digital gaming adventures. Discover extraordinary worlds where every pixel tells a story.</p>
-                        </div>
-                        
-                        <div class="footer-section__column">
                             <h3>Quick Links</h3>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="game-catalog.html">Games</a></li>
-                                <li><a href="shopping-cart.html">Cart</a></li>
-                                <li><a href="contact-page.html">Contact</a></li>
+                                <li><a href="#bundles">Bundles</a></li>
+                                <li><a href="#new-releases">New Releases</a></li>
+                                <li><a href="game-catalog.html">Games Catalog</a></li>
                             </ul>
                         </div>
                         
                         <div class="footer-section__column">
                             <h3>Legal</h3>
                             <ul>
-                                <li><a href="legal-policies.html#privacy">Privacy Policy</a></li>
-                                <li><a href="legal-policies.html#terms">Terms of Service</a></li>
-                                <li><a href="legal-policies.html#returns">Return Policy</a></li>
-                                <li><a href="legal-policies.html#shipping">Shipping Info</a></li>
-                            </ul>
-                        </div>
-                        
-                        <div class="footer-section__column">
-                            <h3>Connect</h3>
-                            <ul>
-                                <li><a href="mailto:info@pixelvault.com">info@pixelvault.com</a></li>
-                                <li><a href="https://twitter.com/pixelvault" target="_blank">Twitter</a></li>
-                                <li><a href="https://discord.gg/pixelvault" target="_blank">Discord</a></li>
-                                <li><a href="https://youtube.com/pixelvault" target="_blank">YouTube</a></li>
+                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                                <li><a href="terms-of-service.html">Terms of Service</a></li>
+                                <li><a href="return-policy.html">Return Policy</a></li>
+                                <li><a href="shipping-delivery.html">Shipping & Delivery</a></li>
                             </ul>
                         </div>
                     </div>
                     
                     <div class="footer-section__bottom">
-                        <p>&copy; 2024 PixelVault. All rights reserved. Gaming excellence, delivered digitally.</p>
+                        <p>&copy; 2025 OnlineGameFusionLab.com | All rights reserved</p>
                     </div>
                 </div>
             </footer>
