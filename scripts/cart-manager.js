@@ -140,9 +140,8 @@ const cartManager = {
   proceedToCheckout() {
     const cartItems = cartManagementSystem.getCartItemsFromStorage();
     if (cartItems.length > 0) {
-      // Simulate checkout process
-      console.log("Proceeding to checkout with:", cartItems);
-      alert("Checkout is not implemented yet, but your items are ready!");
+      // Redirect to checkout page
+      window.location.href = "checkout.html";
     } else {
       alert("Your cart is empty!");
     }
